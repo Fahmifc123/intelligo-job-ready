@@ -1,0 +1,60 @@
+{
+  "auth": {
+    "signInSuccess": "login berhasil",
+    "emailAndPasswordRequired": "Email dan kata sandi diperlukan",
+    "emailPasswordAndCertificateRequired": "Email, kata sandi, dan ID Sertifikat diperlukan",
+    "emailRequired": "Email diperlukan",
+    "invalidCredentials": "Autentikasi gagal: Email atau kata sandi tidak valid",
+    "invalidCertificateId": "ID Sertifikat tidak valid atau tidak cocok",
+    "userNotFound": "Pengguna tidak ditemukan di database",
+    "passwordResetEmailSent": "Silakan periksa email Anda untuk instruksi reset password. Jika tidak melihatnya, silakan periksa folder spam Anda.",
+    "passwordResetFailed": "Gagal mengirim email reset password. Silakan coba lagi nanti.",
+    "passwordChanged": "Kata sandi berhasil diubah",
+    "passwordChangeFailed": "Gagal mengubah kata sandi",
+    "unauthorized": "Tidak diotorisasi",
+    "userNotFoundInDb": "Pengguna tidak ditemukan dalam database",
+    "sessionCleared": "Sesi berhasil dihapus"
+  },
+  "admin": {
+    "user": {
+      "passwordUpdated": "Kata sandi berhasil diperbarui",
+      "passwordUpdateFailed": "Gagal memperbarui kata sandi",
+      "userAdded": "Pengguna berhasil ditambahkan",
+      "userAddFailed": "Gagal menambahkan pengguna",
+      "userDeleted": "Pengguna berhasil dihapus",
+      "userDeleteFailed": "Gagal menghapus pengguna",
+      "userUpdated": "Pengguna berhasil diperbarui",
+      "userUpdateFailed": "Gagal memperbarui pengguna",
+      "userList": "Daftar pengguna berhasil ditampilkan",
+      "userListFailed": "Gagal menampilkan daftar pengguna"
+    },
+    "session": { 
+      "sessionListFailed": "Gagal menampilkan daftar sesi",
+      "sessionRevoked": "Sesi berhasil dicabut",
+      "sessionRevokeFailed": "Gagal mencabut sesi",
+      "allSessionsRevoked": "Semua sesi berhasil dicabut",
+      "allSessionsRevokeFailed": "Gagal mencabut semua sesi"
+    }
+  },
+  "user":{
+    "cvAnalysis":{
+      "uploadSuccess": "Analisis CV berhasil diunggah",
+      "uploadError": "Gagal mengunggah CV",
+      "invalidFileType": "Jenis file tidak valid. Hanya file PDF dan DOCX yang diizinkan.",
+      "noFileUploaded": "Tidak ada file yang diunggah"
+    },
+    "leaderboard":{
+      "categoriesRetrieved": "Kategori leaderboard berhasil diambil",
+      "entriesRetrieved": "Entri leaderboard berhasil diambil",
+      "positionRetrieved": "Posisi pengguna berhasil diambil",
+      "categoryNotFound": "Kategori leaderboard tidak ditemukan"
+    },
+    "alumniProfile":{
+      "profileRetrieved": "Profil alumni berhasil diambil",
+      "profileSaved": "Profil alumni berhasil disimpan",
+      "profileNotFound": "Profil alumni tidak ditemukan",
+      "skillAdded": "Keterampilan berhasil ditambahkan",
+      "skillRemoved": "Keterampilan berhasil dihapus"
+    }
+  }
+}

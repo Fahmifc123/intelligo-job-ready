@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Alumni Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0A66C2",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#1D2939",
+                        "card-light": "#FFFFFF",
+                        "card-dark": "#2c3a4a",
+                        "text-primary-light": "#1D2939",
+                        "text-primary-dark": "#F0F2F5",
+                        "text-secondary-light": "#475467",
+                        "text-secondary-dark": "#98A2B3",
+                        "border-light": "#F0F2F5",
+                        "border-dark": "#344054",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-light dark:border-border-dark px-6 md:px-10 py-4 bg-card-light dark:bg-card-dark sticky top-0 z-10">
+<div class="flex items-center gap-4 text-text-primary-light dark:text-text-primary-dark">
+<span class="material-symbols-outlined text-primary text-2xl">school</span>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Alumni Network</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-center items-center gap-9">
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Home</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Directory</a>
+<a class="text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#">Events</a>
+<a class="text-primary dark:text-primary text-sm font-bold leading-normal" href="#">Profile</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 w-10 bg-border-light dark:bg-border-dark text-text-secondary-light dark:text-text-secondary-dark hover:bg-primary/10 dark:hover:bg-primary/20">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User avatar of Jordan Lee" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCMJFAt9y-83bJh_9pN_Ltt3CQy3PAFw-s9hCKJn5YlIuCwMpXfrN6r4B5TG6ben6UL8PNP1mpN1YOOaCEAnKKi1aAiz5nGVglXnWPAo8tBufS-6fivGUhg4bJdPKOTEk_QsvXg0WG_w91qCw5UFUFPam8VnaGmgtVIErW0nwv2UKChrc0uUEbEqC4ZcQfto71sucT98fzNHEUfp-6m7CbAWh73YPKyBZVhIOnFOtpI35zEOp-TYtqQyGRlT1E3_nDOgFCyM1_u1b5K");'></div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="w-full max-w-7xl mx-auto py-8 px-6">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Profile Details -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- ProfileHeader -->
+<div class="flex flex-col gap-6 p-6 bg-card-light dark:bg-card-dark rounded-xl @container">
+<div class="flex w-full flex-col gap-4 @[520px]:flex-row @[520px]:items-start @[520px]:justify-between">
+<div class="flex items-center gap-5">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full min-h-24 w-24 md:min-h-32 md:w-32 flex-shrink-0" data-alt="Profile picture of Jordan Lee" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAAZy1mu7t8UFilg6_dd9STFSihgxeNbjuMzK2XAlH40YyoueDN-2sR8YvyyEx9LabnXiB3R-YrL3DwmWmMvcOyV_HYb3s3rKjgYzI132yP_Q1gbyHoYTjbIBPzZVBjRDkT8EpYd_6pPvFFrW2KYfgfBnTxq4Chc7b1xcM0kNmLXSfOb2kRRVyU7YR_wlkz99_Gg6D9W-1AJohgNbYEd_GCIaldVGl9GBmbnfkE3jrGGEn2Mu1AaNY_SecKy-1lISsJYTVXuLw4wvD4");'></div>
+<div class="flex flex-col justify-center">
+<h1 class="text-text-primary-light dark:text-text-primary-dark text-2xl md:text-3xl font-bold leading-tight tracking-[-0.015em]">Jordan Lee</h1>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-normal mt-1">Senior Software Engineer | AI &amp; Machine Learning</p>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-sm font-normal leading-normal mt-1">Tech Solutions Inc. • San Francisco, CA</p>
+</div>
+</div>
+</div>
+<div class="gap-2 flex flex-wrap justify-start border-t border-border-light dark:border-border-dark pt-4">
+<div class="flex items-center gap-2 p-2.5 text-center text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined text-xl">mail</span>
+<p class="text-sm font-medium leading-normal">Email</p>
+</div>
+<div class="flex items-center gap-2 p-2.5 text-center text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary cursor-pointer">
+<svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.75c0-1.4-.5-2.5-1.8-2.5-1 0-1.5.6-1.7 1.2-.1.2-.1.5-.1.8V19h-3v-9h3v1.3c.4-.7 1.1-1.3 2.7-1.3 2 0 3.4 1.3 3.4 4.1z"></path></svg>
+<p class="text-sm font-medium leading-normal">LinkedIn</p>
+</div>
+<div class="flex items-center gap-2 p-2.5 text-center text-text-secondary-light dark:text-text-secondary-dark hover:text-primary dark:hover:text-primary cursor-pointer">
+<span class="material-symbols-outlined text-xl">link</span>
+<p class="text-sm font-medium leading-normal">Website</p>
+</div>
+</div>
+</div>
+<!-- About Me Card -->
+<div class="p-6 bg-card-light dark:bg-card-dark rounded-xl flex flex-col gap-4">
+<h3 class="text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em]">About Me</h3>
+<p class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-relaxed">Experienced Senior Software Engineer with a demonstrated history of working in the computer software industry. Skilled in AI &amp; Machine Learning, Python, and cloud computing. Strong engineering professional with a Bachelor's degree focused in Computer Science from University of Innovation.</p>
+</div>
+<!-- Skills Card -->
+<div class="p-6 bg-card-light dark:bg-card-dark rounded-xl flex flex-col gap-4">
+<h3 class="text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em]">Skills</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light rounded-full text-sm font-medium">AI &amp; Machine Learning</span>
+<span class="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light rounded-full text-sm font-medium">Python</span>
+<span class="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light rounded-full text-sm font-medium">Cloud Computing</span>
+<span class="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light rounded-full text-sm font-medium">Data Structures</span>
+<span class="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light rounded-full text-sm font-medium">Agile Methodologies</span>
+<span class="px-3 py-1 bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary-light rounded-full text-sm font-medium">Software Development</span>
+</div>
+</div>
+<!-- Work Experience Card -->
+<div class="p-6 bg-card-light dark:bg-card-dark rounded-xl flex flex-col gap-6">
+<h3 class="text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em]">Work Experience</h3>
+<div class="flex flex-col gap-6">
+<div class="flex gap-4">
+<div class="flex items-center justify-center size-12 rounded-lg bg-border-light dark:bg-border-dark flex-shrink-0">
+<span class="material-symbols-outlined text-3xl text-text-secondary-light dark:text-text-secondary-dark">apartment</span>
+</div>
+<div>
+<h4 class="font-semibold text-text-primary-light dark:text-text-primary-dark">Senior Software Engineer</h4>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Tech Solutions Inc. • Full-time</p>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mt-1">Jan 2018 - Present • 6 yrs</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center justify-center size-12 rounded-lg bg-border-light dark:bg-border-dark flex-shrink-0">
+<span class="material-symbols-outlined text-3xl text-text-secondary-light dark:text-text-secondary-dark">domain</span>
+</div>
+<div>
+<h4 class="font-semibold text-text-primary-light dark:text-text-primary-dark">Software Engineer</h4>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Innovatech Corp • Full-time</p>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mt-1">Jun 2015 - Dec 2017 • 2 yrs 7 mos</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Education Card -->
+<div class="p-6 bg-card-light dark:bg-card-dark rounded-xl flex flex-col gap-6">
+<h3 class="text-text-primary-light dark:text-text-primary-dark text-xl font-bold leading-tight tracking-[-0.015em]">Education</h3>
+<div class="flex gap-4">
+<div class="flex items-center justify-center size-12 rounded-lg bg-border-light dark:bg-border-dark flex-shrink-0">
+<span class="material-symbols-outlined text-3xl text-text-secondary-light dark:text-text-secondary-dark">school</span>
+</div>
+<div>
+<h4 class="font-semibold text-text-primary-light dark:text-text-primary-dark">University of Innovation</h4>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Bachelor of Science, Computer Science</p>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark mt-1">2011 - 2015</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Sidebar -->
+<aside class="lg:col-span-1">
+<div class="sticky top-24 flex flex-col gap-6">
+<div class="p-6 bg-card-light dark:bg-card-dark rounded-xl flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="text-text-primary-light dark:text-text-primary-dark text-lg font-bold">Profile Strength</h3>
+<span class="text-primary text-sm font-semibold">85%</span>
+</div>
+<div class="w-full bg-border-light dark:bg-border-dark rounded-full h-2">
+<div class="bg-primary h-2 rounded-full" style="width: 85%"></div>
+</div>
+<p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">Complete your profile to increase your visibility and connect with more alumni.</p>
+</div>
+<div class="p-6 bg-card-light dark:bg-card-dark rounded-xl flex flex-col gap-4">
+<ul class="space-y-3 text-sm text-text-secondary-light dark:text-text-secondary-dark">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">mail</span>
+<span>jordan.lee@email.com</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">call</span>
+<span>(123) 456-7890</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">location_on</span>
+<span>San Francisco, CA</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>Graduated: Class of '15</span>
+</li>
+</ul>
+</div>
+<div class="flex flex-col gap-3">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90">
+<span class="truncate">Edit Profile</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-11 px-4 bg-border-light dark:bg-border-dark text-text-primary-light dark:text-text-primary-dark text-sm font-bold leading-normal tracking-[0.015em] hover:bg-black/5 dark:hover:bg-white/5">
+<span class="truncate">Download Resume</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</body></html>
