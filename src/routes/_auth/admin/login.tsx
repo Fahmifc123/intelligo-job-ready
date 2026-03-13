@@ -40,7 +40,24 @@ function AdminLoginComponent() {
           navigate({ to: search.redirect || fallback })
         },
         onError: (error: Record<string, any>) => {
-          setErrorMessage(error?.response?.data?.message || error?.response?.data?.error || error?.message)
+          // Extract error message - handle both string and object formats
+          const responseData = error?.response?.data;
+          let message: string;
+          
+          if (typeof responseData?.message === 'string') {
+            message = responseData.message;
+          } else if (typeof responseData?.error === 'string') {
+            message = responseData.error;
+          } else if (typeof responseData?.message === 'object' && responseData?.message?.message) {
+            // Handle nested message object {code, message}
+            message = responseData.message.message;
+          } else if (typeof error?.message === 'string') {
+            message = error.message;
+          } else {
+            message = 'An error occurred during login';
+          }
+          
+          setErrorMessage(message);
         },
       }
     );
