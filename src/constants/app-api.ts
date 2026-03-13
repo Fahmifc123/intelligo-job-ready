@@ -14,13 +14,13 @@
  */
 
 export const APP_BASE_URL = import.meta.env.VITE_APP_BASE_URL
-const APP_URL_V1 = APP_BASE_URL + "/api/v1"
-const APP_URL_PUBLIC = APP_BASE_URL + "/api/public"
+const APP_URL_V1 = APP_BASE_URL + "/v1"
+const APP_URL_PUBLIC = APP_BASE_URL + "/public"
 
 export const AppApi = {
   auth: {
-    login: APP_BASE_URL + "/api/auth/sign-in-email",
-    logout: APP_BASE_URL + "/api/auth/sign-out",
+    login: APP_BASE_URL + "/auth/sign-in-email",
+    logout: APP_BASE_URL + "/auth/sign-out",
   },
   dashboard: {
     metrics: APP_URL_V1 + "/user/dashboard/metrics",
