@@ -1,0 +1,29 @@
+# FastAPI and server
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+python-multipart==0.0.17
+
+# Database
+sqlalchemy==2.0.36
+alembic==1.14.0
+
+# Authentication
+pyjwt==2.10.0
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.3.0
+
+# HTTP client for CV analysis
+httpx==0.27.2
+
+# Environment variables
+python-dotenv==1.0.1
+
+# CORS
+python-cors==1.0.0
+
+# Validation
+pydantic==2.9.2
+pydantic-settings==2.6.1
+
+# i18n
+babel==2.16.0
