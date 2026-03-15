@@ -42,7 +42,5 @@ else
         --host $HOST \
         --port $PORT \
         --workers 4 \
-        --log-level info \
-        --access-log \
-        --error-logfile logs/error.log
+        --log-level info
 fi
