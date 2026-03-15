@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     
     # Server
     host: str = "0.0.0.0"
-    port: int = 5050
+    port: int = 8001
     
     # CV Analysis
     cv_analysis_api_url: str = "http://localhost:8000/analyze-cv"

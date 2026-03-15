@@ -11,6 +11,6 @@ source venv/bin/activate
 # Run uvicorn with production settings
 exec uvicorn app.main:app \
     --host 0.0.0.0 \
-    --port 5050 \
+    --port 8001 \
     --workers 4 \
     --log-level info

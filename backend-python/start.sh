@@ -5,7 +5,7 @@
 
 MODE=${1:-prod}
 HOST=${HOST:-0.0.0.0}
-PORT=${PORT:-5050}
+PORT=${PORT:-8001}
 
 echo "Starting Job Ready API..."
 echo "Mode: $MODE"
