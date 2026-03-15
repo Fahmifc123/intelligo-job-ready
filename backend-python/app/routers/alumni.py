@@ -1,21 +1,20 @@
 from typing import List, Optional
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as DBSession
 from app.core.database import get_db
 from app.models.alumni import AlumniProfile, AlumniSkill, AlumniEducation, AlumniCertification, AlumniWorkExperience
-from app.models.auth import UserSession
+from app.models.auth import Session as UserSession
 from app.schemas.alumni import (
     AlumniProfileCreate, AlumniProfileUpdate, AlumniProfileResponse,
     SkillCreate, SkillResponse, EducationCreate, EducationResponse,
     CertificationCreate, CertificationResponse, WorkExperienceCreate, WorkExperienceResponse
 )
-from app.routers.auth import get_current_user_from_token
 
 router = APIRouter(prefix="/v1/user/alumni", tags=["Alumni Profile"])
 
 
-def get_current_user_id(request, credentials, db: Session):
+def get_current_user_id(request, credentials, db: DBSession):
     """Helper to get current user ID from session"""
     token = request.cookies.get("sid")
     if not token and credentials:
@@ -40,7 +39,7 @@ def get_current_user_id(request, credentials, db: Session):
 async def get_profile(
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's alumni profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -60,7 +59,7 @@ async def create_profile(
     profile_data: AlumniProfileCreate,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Create alumni profile for current user"""
     user_id = get_current_user_id(request, credentials, db)
@@ -91,7 +90,7 @@ async def update_profile(
     profile_data: AlumniProfileUpdate,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Update current user's alumni profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -119,7 +118,7 @@ async def update_photo(
     photo: UploadFile = File(...),
     request=None,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Update profile photo"""
     user_id = get_current_user_id(request, credentials, db)
@@ -145,7 +144,7 @@ async def update_photo(
 async def get_skills(
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's skills"""
     user_id = get_current_user_id(request, credentials, db)
@@ -165,7 +164,7 @@ async def add_skill(
     skill_data: SkillCreate,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Add skill to profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -194,7 +193,7 @@ async def delete_skill(
     skill_id: str,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete skill from profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -222,7 +221,7 @@ async def delete_skill(
 async def get_education(
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's education"""
     user_id = get_current_user_id(request, credentials, db)
@@ -242,7 +241,7 @@ async def add_education(
     edu_data: EducationCreate,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Add education to profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -271,7 +270,7 @@ async def delete_education(
     edu_id: str,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete education from profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -299,7 +298,7 @@ async def delete_education(
 async def get_certifications(
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's certifications"""
     user_id = get_current_user_id(request, credentials, db)
@@ -319,7 +318,7 @@ async def add_certification(
     cert_data: CertificationCreate,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Add certification to profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -348,7 +347,7 @@ async def delete_certification(
     cert_id: str,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete certification from profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -376,7 +375,7 @@ async def delete_certification(
 async def get_work_experience(
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's work experience"""
     user_id = get_current_user_id(request, credentials, db)
@@ -396,7 +395,7 @@ async def add_work_experience(
     work_data: WorkExperienceCreate,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Add work experience to profile"""
     user_id = get_current_user_id(request, credentials, db)
@@ -425,7 +424,7 @@ async def delete_work_experience(
     work_id: str,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete work experience from profile"""
     user_id = get_current_user_id(request, credentials, db)

@@ -3,18 +3,18 @@ import uuid
 from datetime import datetime, timezone
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, Form
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as DBSession
 from app.core.database import get_db
 from app.core.config import get_settings
 from app.models.cv_analysis import CVAnalysis, CVAnalysisAspect
-from app.models.auth import UserSession
+from app.models.auth import Session as UserSession
 from app.schemas.cv_analysis import CVAnalysisResponse, CVUploadResponse
 
 router = APIRouter(prefix="/v1/user/cv-analysis", tags=["CV Analysis"])
 settings = get_settings()
 
 
-def get_current_user_id(request, credentials, db: Session):
+def get_current_user_id(request, credentials, db: DBSession):
     """Helper to get current user ID from session"""
     token = request.cookies.get("sid")
     if not token and credentials:
@@ -40,7 +40,7 @@ async def upload_cv(
     credentials=None,
     role: str = Form(...),
     cv_file: UploadFile = File(...),
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Upload CV for analysis"""
     user_id = get_current_user_id(request, credentials, db)
@@ -73,18 +73,6 @@ async def upload_cv(
             status_code=500,
             detail={"success": False, "message": "Failed to connect to CV analysis service"}
         )
-    
-    # Parse analysis result
-    # Assuming the API returns structure like:
-    # {
-    #   "overall_score": 85,
-    #   "skor_kecocokan_role": 90,
-    #   "suggestions": {...},
-    #   "kekuatan_utama": [...],
-    #   "gaps": [...],
-    #   "prioritas_perbaikan": [...],
-    #   "aspects": [{"aspect_name": "Structure", "score": 80}, ...]
-    # }
     
     # Create CV analysis record
     new_analysis = CVAnalysis(
@@ -126,7 +114,7 @@ async def upload_cv(
 async def get_results(
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's CV analysis results"""
     user_id = get_current_user_id(request, credentials, db)
@@ -144,7 +132,7 @@ async def get_result_detail(
     analysis_id: str,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get specific CV analysis result"""
     user_id = get_current_user_id(request, credentials, db)
@@ -168,7 +156,7 @@ async def delete_result(
     analysis_id: str,
     request,
     credentials=None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete CV analysis result"""
     user_id = get_current_user_id(request, credentials, db)

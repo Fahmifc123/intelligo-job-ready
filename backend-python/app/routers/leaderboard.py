@@ -1,10 +1,10 @@
 from typing import List, Optional
 from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as DBSession
 from app.core.database import get_db
 from app.models.leaderboard import LeaderboardCategory, LeaderboardEntry
-from app.models.auth import UserSession
+from app.models.auth import Session as UserSession
 from app.schemas.leaderboard import (
     LeaderboardCategoryCreate, LeaderboardCategoryUpdate, LeaderboardCategoryResponse,
     LeaderboardEntryCreate, LeaderboardEntryResponse, UserPositionResponse
@@ -13,7 +13,7 @@ from app.schemas.leaderboard import (
 router = APIRouter(prefix="/v1/user/leaderboard", tags=["Leaderboard"])
 
 
-def get_current_user_id(request, credentials, db: Session):
+def get_current_user_id(request, credentials, db: DBSession):
     """Helper to get current user ID from session"""
     token = request.cookies.get("sid")
     if not token and credentials:
@@ -37,7 +37,7 @@ def get_current_user_id(request, credentials, db: Session):
 @router.get("/categories", response_model=dict)
 async def get_categories(
     active_only: bool = Query(True),
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get all leaderboard categories"""
     query = db.query(LeaderboardCategory)
@@ -56,7 +56,7 @@ async def get_categories(
 @router.post("/categories", response_model=dict)
 async def create_category(
     category_data: LeaderboardCategoryCreate,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Create new leaderboard category (Admin)"""
     new_category = LeaderboardCategory(**category_data.model_dump())
@@ -75,7 +75,7 @@ async def create_category(
 async def update_category(
     category_id: str,
     category_data: LeaderboardCategoryUpdate,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Update leaderboard category (Admin)"""
     category = db.query(LeaderboardCategory).filter(LeaderboardCategory.id == category_id).first()
@@ -98,7 +98,7 @@ async def update_category(
 @router.delete("/categories/{category_id}", response_model=dict)
 async def delete_category(
     category_id: str,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete leaderboard category (Admin)"""
     category = db.query(LeaderboardCategory).filter(LeaderboardCategory.id == category_id).first()
@@ -117,7 +117,7 @@ async def get_entries(
     category_id: Optional[str] = Query(None),
     page: int = Query(1, ge=1),
     limit: int = Query(10, ge=1, le=100),
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get leaderboard entries with pagination"""
     query = db.query(LeaderboardEntry)
@@ -145,7 +145,7 @@ async def get_entries_by_category(
     category_id: str,
     page: int = Query(1, ge=1),
     limit: int = Query(10, ge=1, le=100),
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get leaderboard entries by category"""
     category = db.query(LeaderboardCategory).filter(LeaderboardCategory.id == category_id).first()
@@ -174,7 +174,7 @@ async def get_entries_by_category(
 @router.post("/entries", response_model=dict)
 async def create_entry(
     entry_data: LeaderboardEntryCreate,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Create leaderboard entry (Admin)"""
     # Check if entry already exists for this user in this category
@@ -201,7 +201,7 @@ async def create_entry(
 @router.delete("/entries/{entry_id}", response_model=dict)
 async def delete_entry(
     entry_id: str,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete leaderboard entry (Admin)"""
     entry = db.query(LeaderboardEntry).filter(LeaderboardEntry.id == entry_id).first()
@@ -220,7 +220,7 @@ async def get_user_position(
     request,
     credentials=None,
     category_id: Optional[str] = Query(None),
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get current user's position in leaderboard"""
     user_id = get_current_user_id(request, credentials, db)

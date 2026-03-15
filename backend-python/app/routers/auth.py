@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 from fastapi import APIRouter, Depends, HTTPException, Request, Response, Form
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as DBSession
 from app.core.database import get_db
 from app.core.security import create_access_token, decode_token
 from app.models.auth import User, Session as UserSession, UserRole
@@ -20,7 +20,7 @@ async def sign_in_email(
     certificate_id: Optional[str] = Form(None),
     email: Optional[str] = Form(None),
     password: Optional[str] = Form(None),
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Sign in with email/password (admin) or certificate ID (user)"""
     
@@ -89,7 +89,7 @@ async def sign_in_email(
 async def sign_out(
     request: Request,
     response: Response,
-    db: Session = Depends(get_db),
+    db: DBSession = Depends(get_db),
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
 ):
     """Sign out and clear session"""
@@ -112,7 +112,7 @@ async def sign_out(
 @router.get("/session", response_model=SessionResponse)
 async def get_session(
     request: Request,
-    db: Session = Depends(get_db),
+    db: DBSession = Depends(get_db),
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
 ):
     """Get current user session"""
@@ -153,7 +153,7 @@ async def get_session(
 @router.get("/user-info")
 async def get_user_info(
     request: Request,
-    db: Session = Depends(get_db),
+    db: DBSession = Depends(get_db),
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
 ):
     """Get authenticated user info"""
@@ -199,7 +199,7 @@ async def get_user_info(
 async def change_password(
     request: Request,
     data: ChangePasswordRequest,
-    db: Session = Depends(get_db),
+    db: DBSession = Depends(get_db),
     credentials: Optional[HTTPAuthorizationCredentials] = Depends(security)
 ):
     """Change user password"""

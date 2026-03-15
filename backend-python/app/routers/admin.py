@@ -1,6 +1,6 @@
 from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Query
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session as DBSession
 from app.core.database import get_db
 from app.models.auth import User, UserRole
 from app.schemas.auth import UserCreate, UserUpdate, UserResponse
@@ -8,7 +8,7 @@ from app.schemas.auth import UserCreate, UserUpdate, UserResponse
 router = APIRouter(prefix="/v1/admin", tags=["Admin"])
 
 
-def get_current_admin(db: Session = Depends(get_db)):
+def get_current_admin(db: DBSession = Depends(get_db)):
     # TODO: Implement proper admin authentication
     pass
 
@@ -19,7 +19,7 @@ async def list_users(
     limit: int = Query(10, ge=1, le=100),
     search: Optional[str] = None,
     role: Optional[str] = None,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get list of users with pagination and filtering"""
     query = db.query(User)
@@ -52,7 +52,7 @@ async def list_users(
 @router.post("/user/add", response_model=dict)
 async def create_user(
     user_data: UserCreate,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Create a new user"""
     # Check if email already exists
@@ -95,7 +95,7 @@ async def create_user(
 @router.get("/user/detail/{user_id}", response_model=dict)
 async def get_user_detail(
     user_id: str,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Get user details by ID"""
     user = db.query(User).filter(User.id == user_id).first()
@@ -115,7 +115,7 @@ async def get_user_detail(
 async def update_user(
     user_id: str,
     user_data: UserUpdate,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Update user by ID"""
     user = db.query(User).filter(User.id == user_id).first()
@@ -169,7 +169,7 @@ async def update_user(
 @router.delete("/user/delete/{user_id}", response_model=dict)
 async def delete_user(
     user_id: str,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Delete user by ID"""
     user = db.query(User).filter(User.id == user_id).first()
@@ -192,7 +192,7 @@ async def delete_user(
 async def change_user_password(
     user_id: str,
     new_password: str,
-    db: Session = Depends(get_db)
+    db: DBSession = Depends(get_db)
 ):
     """Change user password by admin"""
     user = db.query(User).filter(User.id == user_id).first()
