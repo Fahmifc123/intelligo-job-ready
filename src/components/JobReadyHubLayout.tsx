@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { MessageSquareText, FolderKanban, Linkedin, Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, UserCircle } from "lucide-react";
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useLocation } from "react-router-dom";
@@ -13,15 +13,17 @@ export const hubNavItems = [
   { path: "/profile", label: "Profil & Checklist", icon: UserCircle, featureKey: "profile" },
   { path: "/cv-analyzer", label: "CV Analyzer", icon: FileText, featureKey: "cv-analyzer" },
   { path: "/cv-builder", label: "CV Builder", icon: FileEdit, featureKey: "cv-builder" },
+  { path: "/linkedin", label: "Optimasi LinkedIn", icon: Linkedin, featureKey: "linkedin-optimizer" },
   { path: "/cover-letter", label: "Cover Letter", icon: Mail, featureKey: "cover-letter" },
   { path: "/courses", label: "Video Course", icon: PlayCircle, featureKey: "video-course" },
   { path: "/live-sessions", label: "Live Session", icon: CalendarDays, featureKey: "live-session" },
   { path: "/mentor", label: "Sesi Mentor", icon: UserRoundCheck, featureKey: "mentor-session" },
-  { path: "/interview-prep", label: "Latihan Interview", icon: Mic, featureKey: "interview-prep" },
+  { path: "/interview-prep", label: "Interview Teks", icon: MessageSquareText, featureKey: "interview-prep" },
   { path: "/interview-bank", label: "Bank Interview", icon: MessagesSquare, featureKey: "interview-bank" },
-  { path: "/interview-realtime", label: "Interview Realtime", icon: Radio, featureKey: "interview-realtime" },
+  { path: "/interview-realtime", label: "Interview Suara", icon: Mic, featureKey: "interview-realtime" },
   { path: "/jobs", label: "Lowongan", icon: Briefcase, featureKey: "job-board" },
   { path: "/applications", label: "Lamaran Saya", icon: ClipboardList, featureKey: "application-tracker" },
+  { path: "/case-studies", label: "Studi Kasus", icon: FolderKanban, featureKey: "case-study" },
   { path: "/sql-test", label: "Coding Test SQL", icon: Database, featureKey: "sql-test" },
   { path: "/coding-test", label: "Coding Test", icon: Code2, featureKey: "coding-test" },
 ];

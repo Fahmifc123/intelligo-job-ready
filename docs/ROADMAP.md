@@ -17,8 +17,8 @@ Semua fitur baru dilindungi feature flag dan bisa dinyalakan satu per satu dari 
 ## Tahap 3 - Latihan
 - [x] Bank pertanyaan interview per posisi + panduan STAR.
 - [x] Coding Test SQL.
-- [ ] Studi kasus take-home dengan dataset dan rubrik.
-- [ ] Optimasi LinkedIn dengan AI.
+- [x] Studi kasus take-home dengan dataset dan rubrik.
+- [x] Optimasi LinkedIn dengan AI.
 
 ## Tahap 4 - Motivasi dan mitra
 - [ ] Target mingguan di dashboard.

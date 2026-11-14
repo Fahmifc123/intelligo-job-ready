@@ -51,6 +51,9 @@ export default function JobReadyHubProfile() {
   const [publicUsername, setPublicUsername] = useState<string | null>(null);
   const [isTogglingPublic, setIsTogglingPublic] = useState(false);
   const [hasCv, setHasCv] = useState(true);
+  const [usernameDraft, setUsernameDraft] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [savingUsername, setSavingUsername] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const tabParam = searchParams.get("tab") || "";
   const tab = ["profile", "checklist", "public"].includes(tabParam) ? tabParam : "profile";
@@ -75,6 +78,7 @@ export default function JobReadyHubProfile() {
         setReadiness(checked);
         setIsPublic(Boolean(publicSettings?.is_public));
         setPublicUsername(publicSettings?.username || null);
+        setUsernameDraft(publicSettings?.username || "");
       })
       .finally(() => setLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,6 +96,7 @@ export default function JobReadyHubProfile() {
       const data = await response.json();
       setIsPublic(Boolean(data.is_public));
       setPublicUsername(data.username || null);
+      setUsernameDraft(data.username || "");
       toast.success(checked ? "Profil publik diaktifkan" : "Profil publik dinonaktifkan");
     } catch {
       toast.error("Gagal mengubah status profil publik");
@@ -100,7 +105,33 @@ export default function JobReadyHubProfile() {
     }
   };
 
-  const publicProfileUrl = publicUsername ? `https://jobready.intelligo.id/u/${publicUsername}` : "";
+  const publicProfileUrl = publicUsername ? `https://intelligo.id/u/${publicUsername}` : "";
+
+  const handleSaveUsername = async () => {
+    const value = usernameDraft.trim().toLowerCase();
+    if (!/^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])$/.test(value) || value.includes("--")) {
+      setUsernameError("3-40 karakter: huruf kecil, angka, dan tanda hubung, tidak diawali atau diakhiri tanda hubung.");
+      return;
+    }
+    setSavingUsername(true);
+    setUsernameError("");
+    try {
+      const response = await fetchAsAlumni("/alumni/profile/public-settings", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: value }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "Gagal menyimpan username");
+      setPublicUsername(data.username || value);
+      setUsernameDraft(data.username || value);
+      toast.success("Link profil diperbarui");
+    } catch (err) {
+      setUsernameError(err instanceof Error ? err.message : "Gagal menyimpan username");
+    } finally {
+      setSavingUsername(false);
+    }
+  };
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(publicProfileUrl);
@@ -275,6 +306,34 @@ export default function JobReadyHubProfile() {
                   <Button type="button" variant="outline" size="icon" onClick={handleCopyLink} className="shrink-0" aria-label="Salin link">
                     <Copy className="w-4 h-4" />
                   </Button>
+                </div>
+                <div className="space-y-1.5 pt-2">
+                  <Label htmlFor="public-username">Ubah nama di link</Label>
+                  <div className="flex flex-col sm:flex-row gap-2 min-w-0">
+                    <div className="flex min-w-0 flex-1 items-center rounded-md border border-input bg-background focus-within:ring-2 focus-within:ring-ring">
+                      <span className="pl-3 text-sm text-muted-foreground whitespace-nowrap">intelligo.id/u/</span>
+                      <input
+                        id="public-username"
+                        value={usernameDraft}
+                        onChange={(e) => {
+                          setUsernameDraft(e.target.value.toLowerCase().replace(/\s+/g, "-"));
+                          setUsernameError("");
+                        }}
+                        maxLength={40}
+                        autoComplete="off"
+                        spellCheck={false}
+                        className="min-w-0 flex-1 bg-transparent py-2 pr-3 text-sm outline-none"
+                      />
+                    </div>
+                    <Button type="button" onClick={handleSaveUsername} disabled={savingUsername || usernameDraft === publicUsername} className="w-fit">
+                      {savingUsername ? "Menyimpan..." : "Simpan"}
+                    </Button>
+                  </div>
+                  {usernameError ? (
+                    <p role="alert" className="text-xs text-destructive">{usernameError}</p>
+                  ) : (
+                    <p className="text-xs text-muted-foreground">Harus unik. Setelah diganti, link lama tidak berlaku lagi.</p>
+                  )}
                 </div>
                 {!hasCv && (
                   <p className="text-xs text-muted-foreground">

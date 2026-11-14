@@ -1,4 +1,4 @@
-import { Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, CalendarDays, Database, FolderKanban, Linkedin, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
 
 export interface JobReadyHubFeatureDef {
   key: string;
@@ -31,13 +31,13 @@ export const JOB_READY_HUB_FEATURES: JobReadyHubFeatureDef[] = [
   },
   {
     key: "interview-prep",
-    label: "Latihan Interview",
+    label: "Interview Teks",
     icon: Mic,
     comingSoonDescription: "Latihan mock interview suara dengan AI segera hadir untuk kamu.",
   },
   {
     key: "interview-realtime",
-    label: "Interview Realtime",
+    label: "Interview Suara",
     icon: Radio,
     comingSoonDescription: "Latihan interview suara dua arah langsung dengan AI segera hadir untuk kamu.",
   },
@@ -82,6 +82,18 @@ export const JOB_READY_HUB_FEATURES: JobReadyHubFeatureDef[] = [
     label: "Coding Test SQL",
     icon: Database,
     comingSoonDescription: "Latihan SQL dengan penilaian otomatis segera hadir untuk kamu.",
+  },
+  {
+    key: "case-study",
+    label: "Studi Kasus",
+    icon: FolderKanban,
+    comingSoonDescription: "Studi kasus take-home dengan dataset dan rubrik segera hadir untuk kamu.",
+  },
+  {
+    key: "linkedin-optimizer",
+    label: "Optimasi LinkedIn",
+    icon: Linkedin,
+    comingSoonDescription: "Review profil LinkedIn dengan AI segera hadir untuk kamu.",
   },
   {
     key: "coding-test",

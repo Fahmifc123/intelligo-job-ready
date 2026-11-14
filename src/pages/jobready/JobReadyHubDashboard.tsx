@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, Check, ClipboardList, PlayCircle, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { MessageSquareText, FolderKanban, Linkedin, Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, Check, ClipboardList, PlayCircle, Code2, FileEdit, FileText, Mail, Mic, UserCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -88,7 +88,7 @@ export default function JobReadyHubDashboard() {
     },
     {
       title: "Latihan interview",
-      description: "Jawab pertanyaan interview dan dapatkan feedback dari AI.",
+      description: "Jawab pertanyaan interview lewat teks dan dapatkan feedback dari AI.",
       done: Boolean(data?.hasInterview),
       to: "/interview-prep",
       cta: "Mulai Latihan",
@@ -102,6 +102,7 @@ export default function JobReadyHubDashboard() {
       items: [
         { title: "CV Analyzer", description: "Cek kecocokan CV kamu dengan posisi yang dituju.", icon: FileText, to: "/cv-analyzer", cta: "Analisis CV", featureKey: "cv-analyzer" },
         { title: "CV Builder", description: "Buat CV yang rapi dan mudah dibaca sistem ATS.", icon: FileEdit, to: "/cv-builder", cta: "Buat CV", featureKey: "cv-builder" },
+        { title: "Optimasi LinkedIn", description: "Dapatkan masukan AI untuk headline dan bagian About LinkedIn kamu.", icon: Linkedin, to: "/linkedin", cta: "Review Profil", featureKey: "linkedin-optimizer" },
         { title: "Cover Letter", description: "Susun surat lamaran dari form yang terarah.", icon: Mail, to: "/cover-letter", cta: "Buat Cover Letter", featureKey: "cover-letter" },
       ],
     },
@@ -116,9 +117,10 @@ export default function JobReadyHubDashboard() {
     {
       title: "Latihan",
       items: [
-        { title: "Latihan Interview", description: "Latihan menjawab pertanyaan interview dengan suara, lalu dapat feedback.", icon: Mic, to: "/interview-prep", cta: "Mulai Latihan", featureKey: "interview-prep" },
+        { title: "Interview Teks", description: "Jawab pertanyaan interview dengan mengetik, lalu dapat skor dan feedback AI.", icon: MessageSquareText, to: "/interview-prep", cta: "Mulai Latihan", featureKey: "interview-prep" },
         { title: "Bank Pertanyaan Interview", description: "Pertanyaan yang sering muncul per posisi, dengan tips dan metode STAR.", icon: MessagesSquare, to: "/interview-bank", cta: "Latihan", featureKey: "interview-bank" },
-        { title: "Interview Realtime", description: "Simulasi interview percakapan dua arah dengan AI. Jumlah sesi dibatasi.", icon: Radio, to: "/interview-realtime", cta: "Buka", featureKey: "interview-realtime" },
+        { title: "Interview Suara", description: "Simulasi interview lewat suara, ngobrol dua arah langsung dengan AI. Jumlah sesi dibatasi.", icon: Mic, to: "/interview-realtime", cta: "Buka", featureKey: "interview-realtime" },
+        { title: "Studi Kasus", description: "Latihan tugas take-home dengan dataset dan rubrik penilaian.", icon: FolderKanban, to: "/case-studies", cta: "Lihat Soal", featureKey: "case-study" },
         { title: "Coding Test SQL", description: "Latihan query SQL dengan data toko, dinilai otomatis.", icon: Database, to: "/sql-test", cta: "Mulai", featureKey: "sql-test" },
         { title: "Coding Test", description: "Latihan manipulasi data dengan pandas, dinilai otomatis.", icon: Code2, to: "/coding-test", cta: "Buka", featureKey: "coding-test" },
       ],

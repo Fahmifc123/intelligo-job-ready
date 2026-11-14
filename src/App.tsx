@@ -11,7 +11,6 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-route
 
 const Login = lazy(() => import("./pages/Login"));
 const NotFound = lazy(() => import("./pages/NotFound"));
-const PublicAlumniProfile = lazy(() => import("./pages/PublicAlumniProfile"));
 const Dashboard = lazy(() => import("./pages/jobready/JobReadyHubDashboard"));
 const Jobs = lazy(() => import("./pages/jobready/JobReadyHubJobs"));
 const CvAnalyzer = lazy(() => import("./pages/jobready/JobReadyHubCvAnalyzer"));
@@ -27,6 +26,8 @@ const LiveSessions = lazy(() => import("./pages/jobready/JobReadyHubLiveSessions
 const Mentor = lazy(() => import("./pages/jobready/JobReadyHubMentor"));
 const InterviewBank = lazy(() => import("./pages/jobready/JobReadyHubInterviewBank"));
 const SqlTest = lazy(() => import("./pages/jobready/JobReadyHubSqlTest"));
+const CaseStudies = lazy(() => import("./pages/jobready/JobReadyHubCaseStudies"));
+const Linkedin = lazy(() => import("./pages/jobready/JobReadyHubLinkedin"));
 const Profile = lazy(() => import("./pages/jobready/JobReadyHubProfile"));
 
 const queryClient = new QueryClient();
@@ -40,6 +41,13 @@ const RouteLoadingFallback = () => (
 const hub = (node: ReactNode, featureKey?: string) => (
   <JobReadyHubLayout>{featureKey ? <FeatureGate featureKey={featureKey}>{node}</FeatureGate> : node}</JobReadyHubLayout>
 );
+
+/** Profil publik tinggal di domain utama: intelligo.id/u/<username>. */
+function PublicProfileRedirect() {
+  const location = useLocation();
+  window.location.replace(`https://intelligo.id${location.pathname}`);
+  return null;
+}
 
 /** Link lama intelligo.id/job-ready-hub/<fitur> -> /<fitur>. */
 function LegacyRedirect() {
@@ -74,8 +82,10 @@ const App = () => (
                 <Route path="/mentor" element={hub(<Mentor />, "mentor-session")} />
                 <Route path="/interview-bank" element={hub(<InterviewBank />, "interview-bank")} />
                 <Route path="/sql-test" element={hub(<SqlTest />, "sql-test")} />
+                <Route path="/case-studies" element={hub(<CaseStudies />, "case-study")} />
+                <Route path="/linkedin" element={hub(<Linkedin />, "linkedin-optimizer")} />
                 <Route path="/profile" element={hub(<Profile />, "profile")} />
-                <Route path="/u/:username" element={<PublicAlumniProfile />} />
+                <Route path="/u/:username" element={<PublicProfileRedirect />} />
                 <Route path="/job-ready-hub/*" element={<LegacyRedirect />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>

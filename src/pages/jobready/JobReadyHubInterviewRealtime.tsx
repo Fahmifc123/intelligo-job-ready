@@ -368,12 +368,12 @@ export default function JobReadyHubInterviewRealtime() {
       <audio ref={audioRef} autoPlay hidden />
 
       <div className="flex items-center gap-2">
-        <h2 className="text-lg font-bold">Interview Realtime</h2>
+        <h2 className="text-lg font-bold">Interview Suara (Realtime)</h2>
         <Badge variant="secondary">Beta</Badge>
       </div>
       <p className="text-sm text-muted-foreground">
         Latihan interview suara dua arah secara langsung dengan AI, seperti panggilan telepon. Berbeda dari
-        menu Latihan Interview biasa, jumlah sesi di sini dibatasi per akun.
+        menu Interview Teks, jumlah sesi di sini dibatasi per akun.
       </p>
 
       {quota && (
@@ -397,8 +397,8 @@ export default function JobReadyHubInterviewRealtime() {
               <div className="flex items-start gap-2 rounded-md border border-destructive/30 bg-destructive/5 p-3 text-sm text-destructive">
                 <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                 <p>
-                  Kuota latihan interview realtime kamu sudah habis. Coba fitur "Latihan Interview"
-                  biasa yang tidak dibatasi jumlah percobaan.
+                  Kuota Interview Suara kamu sudah habis. Coba fitur "Interview Teks"
+                  yang tidak dibatasi jumlah percobaan.
                 </p>
               </div>
             ) : (

@@ -7,8 +7,8 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
-import { Loader2, Mic, Square, Volume2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { Loader2, MessageSquareText } from "lucide-react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface InterviewAttempt {
@@ -23,7 +23,7 @@ interface InterviewAttempt {
 }
 
 type Stage = "setup" | "interview" | "summary";
-type RecordingState = "idle" | "recording" | "transcribing" | "ready" | "evaluating" | "done";
+type RecordingState = "idle" | "evaluating" | "done";
 
 export default function JobReadyHubInterviewPrep() {
   const { fetchAsAlumni } = useAlumniAuth();
@@ -38,13 +38,9 @@ export default function JobReadyHubInterviewPrep() {
   const [recordingState, setRecordingState] = useState<RecordingState>("idle");
   const [transcript, setTranscript] = useState("");
   const [feedback, setFeedback] = useState<{ score: number; strengths: string[]; improvements: string[] } | null>(null);
-  const [isPlayingQuestion, setIsPlayingQuestion] = useState(false);
 
   const [history, setHistory] = useState<InterviewAttempt[]>([]);
 
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
-  const chunksRef = useRef<Blob[]>([]);
 
   const loadHistory = async () => {
     try {
@@ -103,73 +99,9 @@ export default function JobReadyHubInterviewPrep() {
     }
   };
 
-  const handlePlayQuestion = async () => {
-    setIsPlayingQuestion(true);
-    try {
-      const res = await fetchAsAlumni("/alumni/interview/speak", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: questions[currentIndex] }),
-      });
-      if (!res.ok) throw new Error("Failed");
-      const blob = await res.blob();
-      const url = URL.createObjectURL(blob);
-      const audio = new Audio(url);
-      audio.onended = () => setIsPlayingQuestion(false);
-      audio.onerror = () => setIsPlayingQuestion(false);
-      await audio.play();
-    } catch {
-      toast.error("Gagal memutar audio pertanyaan");
-      setIsPlayingQuestion(false);
-    }
-  };
-
-  const handleStartRecording = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      streamRef.current = stream;
-      chunksRef.current = [];
-      const mimeType = MediaRecorder.isTypeSupported("audio/webm") ? "audio/webm" : "";
-      const recorder = mimeType ? new MediaRecorder(stream, { mimeType }) : new MediaRecorder(stream);
-      recorder.ondataavailable = (e) => {
-        if (e.data.size > 0) chunksRef.current.push(e.data);
-      };
-      recorder.onstop = () => {
-        const blob = new Blob(chunksRef.current, { type: mimeType || "audio/webm" });
-        handleStopRecording(blob);
-        streamRef.current?.getTracks().forEach((t) => t.stop());
-      };
-      mediaRecorderRef.current = recorder;
-      recorder.start();
-      setRecordingState("recording");
-    } catch {
-      toast.error("Tidak bisa mengakses mikrofon. Pastikan izin mikrofon diaktifkan.");
-    }
-  };
-
-  const handleStopRecordingClick = () => {
-    mediaRecorderRef.current?.stop();
-  };
-
-  const handleStopRecording = async (blob: Blob) => {
-    setRecordingState("transcribing");
-    try {
-      const formData = new FormData();
-      formData.append("file", blob, "answer.webm");
-      const res = await fetchAsAlumni("/alumni/interview/transcribe", { method: "POST", body: formData });
-      if (!res.ok) throw new Error("Failed");
-      const data = await res.json();
-      setTranscript(data.transcript || "");
-      setRecordingState("ready");
-    } catch {
-      toast.error("Gagal mentranskrip jawaban. Coba rekam ulang, atau ketik manual di bawah.");
-      setRecordingState("idle");
-    }
-  };
-
   const handleGetFeedback = async () => {
     if (!transcript.trim()) {
-      toast.error("Jawaban masih kosong. Rekam atau ketik dulu jawabanmu.");
+      toast.error("Jawaban masih kosong. Ketik dulu jawabanmu.");
       return;
     }
     setRecordingState("evaluating");
@@ -185,7 +117,7 @@ export default function JobReadyHubInterviewPrep() {
       setRecordingState("done");
     } catch {
       toast.error("Gagal mendapatkan feedback AI. Coba lagi.");
-      setRecordingState("ready");
+      setRecordingState("idle");
     }
   };
 
@@ -211,10 +143,10 @@ export default function JobReadyHubInterviewPrep() {
         <Card>
           <CardContent className="p-6 space-y-4">
             <div>
-              <h2 className="text-lg font-bold">Latihan Interview dengan AI</h2>
+              <h2 className="text-lg font-bold">Latihan Interview Teks</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                AI akan membuat 5 pertanyaan mock interview sesuai posisi yang kamu tuju. Jawab dengan
-                merekam suara, dan dapatkan feedback langsung dari AI.
+                AI membuat 5 pertanyaan interview sesuai posisi yang kamu tuju. Ketik jawabanmu, lalu dapatkan skor dan
+                feedback dari AI. Cocok untuk menyusun jawaban dengan tenang sebelum latihan suara di Interview Realtime.
               </p>
             </div>
             <div className="space-y-1.5">
@@ -226,7 +158,7 @@ export default function JobReadyHubInterviewPrep() {
               />
             </div>
             <Button onClick={handleStartPractice} disabled={generatingQuestions} className="gap-2">
-              {generatingQuestions ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mic className="w-4 h-4" />}
+              {generatingQuestions ? <Loader2 className="w-4 h-4 animate-spin" /> : <MessageSquareText className="w-4 h-4" />}
               {generatingQuestions ? "Menyiapkan pertanyaan..." : startError ? "Coba Lagi" : "Mulai Latihan"}
             </Button>
             {generatingQuestions && (
@@ -279,71 +211,31 @@ export default function JobReadyHubInterviewPrep() {
 
         <Card>
           <CardContent className="p-6 space-y-4">
-            <div className="flex items-start justify-between gap-3">
-              <p className="text-base font-semibold">{questions[currentIndex]}</p>
-              <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0"
-                onClick={handlePlayQuestion}
-                disabled={isPlayingQuestion}
-                title="Dengarkan pertanyaan"
-              >
-                {isPlayingQuestion ? <Loader2 className="w-4 h-4 animate-spin" /> : <Volume2 className="w-4 h-4" />}
-              </Button>
-            </div>
+            <p className="text-base font-semibold">{questions[currentIndex]}</p>
 
             <Separator />
 
             <div className="space-y-3">
-              <Label>Jawaban Kamu</Label>
-              <div className="flex items-center gap-3">
-                {recordingState === "idle" && (
-                  <Button onClick={handleStartRecording} className="gap-2">
-                    <Mic className="w-4 h-4" />
-                    Mulai Rekam
-                  </Button>
-                )}
-                {recordingState === "recording" && (
-                  <Button onClick={handleStopRecordingClick} variant="destructive" className="gap-2">
-                    <Square className="w-4 h-4" />
-                    Stop Rekam
-                  </Button>
-                )}
-                {recordingState === "transcribing" && (
-                  <Button disabled className="gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Mentranskrip jawaban...
-                  </Button>
-                )}
-                {(recordingState === "ready" || recordingState === "evaluating" || recordingState === "done") && (
-                  <Button variant="outline" onClick={handleStartRecording} className="gap-2">
-                    <Mic className="w-4 h-4" />
-                    Rekam Ulang
-                  </Button>
-                )}
+              <Label htmlFor="interview-answer">Jawaban kamu</Label>
+              <Textarea
+                id="interview-answer"
+                value={transcript}
+                onChange={(e) => {
+                  setTranscript(e.target.value);
+                  if (recordingState === "done") setRecordingState("idle");
+                }}
+                rows={7}
+                maxLength={4000}
+                placeholder="Tulis jawabanmu seperti sedang menjawab langsung. Untuk pertanyaan pengalaman, pakai alur STAR: situasi, tugas, tindakan, hasil."
+                disabled={recordingState === "evaluating"}
+              />
+              <div className="flex flex-wrap items-center gap-3">
+                <Button onClick={handleGetFeedback} disabled={recordingState === "evaluating" || !transcript.trim()} className="gap-2">
+                  {recordingState === "evaluating" ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+                  {recordingState === "evaluating" ? "Menganalisis jawaban..." : feedback ? "Nilai ulang jawaban" : "Dapatkan Feedback AI"}
+                </Button>
+                <span className="text-xs text-muted-foreground tabular-nums">{transcript.trim() ? transcript.trim().split(/\s+/).length : 0} kata</span>
               </div>
-
-              {(recordingState === "ready" || recordingState === "evaluating" || recordingState === "done") && (
-                <div className="space-y-1.5">
-                  <Label className="text-xs text-muted-foreground">
-                    Hasil transkrip (bisa kamu edit kalau ada yang salah)
-                  </Label>
-                  <Textarea value={transcript} onChange={(e) => setTranscript(e.target.value)} rows={4} />
-                </div>
-              )}
-
-              {recordingState === "ready" && (
-                <Button onClick={handleGetFeedback} className="gap-2">
-                  Dapatkan Feedback AI
-                </Button>
-              )}
-              {recordingState === "evaluating" && (
-                <Button disabled className="gap-2">
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  Menganalisis jawaban...
-                </Button>
-              )}
             </div>
 
             {feedback && (
