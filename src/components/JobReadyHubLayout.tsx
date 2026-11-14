@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, CalendarDays, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, CalendarDays, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useLocation } from "react-router-dom";
@@ -16,6 +16,7 @@ export const hubNavItems = [
   { path: "/cover-letter", label: "Cover Letter", icon: Mail, featureKey: "cover-letter" },
   { path: "/courses", label: "Video Course", icon: PlayCircle, featureKey: "video-course" },
   { path: "/live-sessions", label: "Live Session", icon: CalendarDays, featureKey: "live-session" },
+  { path: "/mentor", label: "Sesi Mentor", icon: UserRoundCheck, featureKey: "mentor-session" },
   { path: "/interview-prep", label: "Latihan Interview", icon: Mic, featureKey: "interview-prep" },
   { path: "/interview-realtime", label: "Interview Realtime", icon: Radio, featureKey: "interview-realtime" },
   { path: "/jobs", label: "Lowongan", icon: Briefcase, featureKey: "job-board" },

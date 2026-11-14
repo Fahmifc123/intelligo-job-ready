@@ -24,6 +24,7 @@ const Applications = lazy(() => import("./pages/jobready/JobReadyHubApplications
 const Courses = lazy(() => import("./pages/jobready/JobReadyHubCourses"));
 const CourseDetail = lazy(() => import("./pages/jobready/JobReadyHubCourseDetail"));
 const LiveSessions = lazy(() => import("./pages/jobready/JobReadyHubLiveSessions"));
+const Mentor = lazy(() => import("./pages/jobready/JobReadyHubMentor"));
 const Profile = lazy(() => import("./pages/jobready/JobReadyHubProfile"));
 
 const queryClient = new QueryClient();
@@ -68,6 +69,7 @@ const App = () => (
                 <Route path="/courses" element={hub(<Courses />, "video-course")} />
                 <Route path="/courses/:id" element={hub(<CourseDetail />, "video-course")} />
                 <Route path="/live-sessions" element={hub(<LiveSessions />, "live-session")} />
+                <Route path="/mentor" element={hub(<Mentor />, "mentor-session")} />
                 <Route path="/profile" element={hub(<Profile />, "profile")} />
                 <Route path="/u/:username" element={<PublicAlumniProfile />} />
                 <Route path="/job-ready-hub/*" element={<LegacyRedirect />} />

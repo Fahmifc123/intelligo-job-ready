@@ -12,7 +12,7 @@ Semua fitur baru dilindungi feature flag dan bisa dinyalakan satu per satu dari 
 ## Tahap 2 - Belajar
 - [x] **Video Course.** Course, modul, video; progres tonton dan lanjutkan. Admin mengelola course. Hosting video belum diputuskan (YouTube unlisted atau Vimeo/Bunny Stream dengan pembatasan domain).
 - [x] **Kalender live session** gratis untuk alumni Job Ready. Kalender dan daftar sesi, tombol tambah ke Google Calendar, link Zoom/Meet hanya untuk alumni yang login. Rekaman bisa masuk ke Video Course. Opsional: tombol "Saya ikut".
-- [ ] **Jadwal sesi mentor** (review CV, mock interview).
+- [x] **Jadwal sesi mentor** (review CV, mock interview).
 
 ## Tahap 3 - Latihan
 - [ ] Bank pertanyaan interview per posisi + panduan STAR.
