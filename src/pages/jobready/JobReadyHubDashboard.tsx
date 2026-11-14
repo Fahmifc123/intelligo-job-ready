@@ -1,4 +1,5 @@
 import Announcements from "@/components/jobready/Announcements";
+import WeeklyTarget from "@/components/jobready/WeeklyTarget";
 import { hubNavGroups } from "@/components/JobReadyHubLayout";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -254,6 +255,7 @@ export default function JobReadyHubDashboard() {
 
         {/* Kolom kanan */}
         <aside className="space-y-4">
+          {!featuresLoading && isEnabled("weekly-target") && <WeeklyTarget />}
           <Card>
             <CardContent className="p-4 space-y-3">
               <p className="text-sm font-semibold">Kelengkapan profil</p>

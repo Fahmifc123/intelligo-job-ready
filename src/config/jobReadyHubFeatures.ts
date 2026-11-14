@@ -1,4 +1,4 @@
-import { Briefcase, CalendarDays, Database, FolderKanban, Linkedin, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Target, Briefcase, CalendarDays, Database, FolderKanban, Linkedin, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
 
 export interface JobReadyHubFeatureDef {
   key: string;
@@ -94,6 +94,12 @@ export const JOB_READY_HUB_FEATURES: JobReadyHubFeatureDef[] = [
     label: "Optimasi LinkedIn",
     icon: Linkedin,
     comingSoonDescription: "Review profil LinkedIn dengan AI segera hadir untuk kamu.",
+  },
+  {
+    key: "weekly-target",
+    label: "Target Mingguan",
+    icon: Target,
+    comingSoonDescription: "Target mingguan di dashboard segera hadir untuk kamu.",
   },
   {
     key: "coding-test",

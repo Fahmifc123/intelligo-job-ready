@@ -21,9 +21,9 @@ Semua fitur baru dilindungi feature flag dan bisa dinyalakan satu per satu dari 
 - [x] Optimasi LinkedIn dengan AI.
 
 ## Tahap 4 - Motivasi dan mitra
-- [ ] Target mingguan di dashboard.
-- [ ] Profil talenta untuk mitra (admin), hanya alumni yang setuju profilnya dibagikan.
-- [ ] Laporan keberhasilan (admin), angka jujur dari data Lamaran Saya.
+- [x] Target mingguan di dashboard.
+- [x] Profil talenta untuk mitra (admin), hanya alumni yang setuju profilnya dibagikan.
+- [x] Laporan keberhasilan (admin), angka jujur dari data Lamaran Saya.
 
 ## Dicatat untuk nanti
 ### Hiring Partner Intelligo (eksklusif)
