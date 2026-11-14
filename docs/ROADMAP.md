@@ -15,8 +15,8 @@ Semua fitur baru dilindungi feature flag dan bisa dinyalakan satu per satu dari 
 - [x] **Jadwal sesi mentor** (review CV, mock interview).
 
 ## Tahap 3 - Latihan
-- [ ] Bank pertanyaan interview per posisi + panduan STAR.
-- [ ] Coding Test SQL.
+- [x] Bank pertanyaan interview per posisi + panduan STAR.
+- [x] Coding Test SQL.
 - [ ] Studi kasus take-home dengan dataset dan rubrik.
 - [ ] Optimasi LinkedIn dengan AI.
 

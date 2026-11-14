@@ -1,4 +1,4 @@
-import { Briefcase, CalendarDays, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
 
 export interface JobReadyHubFeatureDef {
   key: string;
@@ -70,6 +70,18 @@ export const JOB_READY_HUB_FEATURES: JobReadyHubFeatureDef[] = [
     label: "Sesi Mentor",
     icon: UserRoundCheck,
     comingSoonDescription: "Jadwal sesi 1-on-1 dengan mentor segera hadir untuk kamu.",
+  },
+  {
+    key: "interview-bank",
+    label: "Bank Pertanyaan Interview",
+    icon: MessagesSquare,
+    comingSoonDescription: "Bank pertanyaan interview per posisi segera hadir untuk kamu.",
+  },
+  {
+    key: "sql-test",
+    label: "Coding Test SQL",
+    icon: Database,
+    comingSoonDescription: "Latihan SQL dengan penilaian otomatis segera hadir untuk kamu.",
   },
   {
     key: "coding-test",

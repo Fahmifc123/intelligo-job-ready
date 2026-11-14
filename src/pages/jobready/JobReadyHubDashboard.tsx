@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, CalendarDays, UserRoundCheck, Check, ClipboardList, PlayCircle, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, CalendarDays, Database, MessagesSquare, UserRoundCheck, Check, ClipboardList, PlayCircle, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -117,7 +117,9 @@ export default function JobReadyHubDashboard() {
       title: "Latihan",
       items: [
         { title: "Latihan Interview", description: "Latihan menjawab pertanyaan interview dengan suara, lalu dapat feedback.", icon: Mic, to: "/interview-prep", cta: "Mulai Latihan", featureKey: "interview-prep" },
+        { title: "Bank Pertanyaan Interview", description: "Pertanyaan yang sering muncul per posisi, dengan tips dan metode STAR.", icon: MessagesSquare, to: "/interview-bank", cta: "Latihan", featureKey: "interview-bank" },
         { title: "Interview Realtime", description: "Simulasi interview percakapan dua arah dengan AI. Jumlah sesi dibatasi.", icon: Radio, to: "/interview-realtime", cta: "Buka", featureKey: "interview-realtime" },
+        { title: "Coding Test SQL", description: "Latihan query SQL dengan data toko, dinilai otomatis.", icon: Database, to: "/sql-test", cta: "Mulai", featureKey: "sql-test" },
         { title: "Coding Test", description: "Latihan manipulasi data dengan pandas, dinilai otomatis.", icon: Code2, to: "/coding-test", cta: "Buka", featureKey: "coding-test" },
       ],
     },
