@@ -1,0 +1,62 @@
+import { Briefcase, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
+
+export interface JobReadyHubFeatureDef {
+  key: string;
+  label: string;
+  icon: LucideIcon;
+  comingSoonDescription: string;
+}
+
+// Satu sumber kebenaran untuk daftar fitur Job Ready Hub yang bisa
+// diaktif/nonaktifkan admin -- dipakai di FeatureGate (routing), nav &
+// dashboard card (badge "Segera Hadir"), dan panel admin (daftar toggle).
+export const JOB_READY_HUB_FEATURES: JobReadyHubFeatureDef[] = [
+  {
+    key: "cv-analyzer",
+    label: "CV Analyzer",
+    icon: FileText,
+    comingSoonDescription: "Analisis CV berbasis AI segera hadir untuk kamu.",
+  },
+  {
+    key: "cv-builder",
+    label: "CV Builder",
+    icon: FileEdit,
+    comingSoonDescription: "Builder CV dari form, hasil ATS-friendly, segera hadir untuk kamu.",
+  },
+  {
+    key: "cover-letter",
+    label: "Cover Letter",
+    icon: Mail,
+    comingSoonDescription: "Builder surat lamaran dari form segera hadir untuk kamu.",
+  },
+  {
+    key: "interview-prep",
+    label: "Latihan Interview",
+    icon: Mic,
+    comingSoonDescription: "Latihan mock interview suara dengan AI segera hadir untuk kamu.",
+  },
+  {
+    key: "interview-realtime",
+    label: "Interview Realtime",
+    icon: Radio,
+    comingSoonDescription: "Latihan interview suara dua arah langsung dengan AI segera hadir untuk kamu.",
+  },
+  {
+    key: "job-board",
+    label: "Job Board",
+    icon: Briefcase,
+    comingSoonDescription: "Fitur pencarian & rekomendasi lowongan kerja segera hadir untuk kamu.",
+  },
+  {
+    key: "coding-test",
+    label: "Coding Test",
+    icon: Code2,
+    comingSoonDescription: "Latihan coding pandas dengan penilaian otomatis segera hadir untuk kamu.",
+  },
+  {
+    key: "profile",
+    label: "Profil & Checklist",
+    icon: UserCircle,
+    comingSoonDescription: "Profil karier & readiness checklist segera hadir untuk kamu.",
+  },
+];
