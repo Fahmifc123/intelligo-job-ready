@@ -3,6 +3,8 @@
 Rangkuman rencana bot WhatsApp untuk **input** dan **pengiriman** info loker ke grup alumni Intelligo ID.
 Status: rencana, belum dibangun. Dokumen ini ringkasan diskusi 14 November 2026.
 
+![Arsitektur Bot WA Loker](arsitektur.png)
+
 ## Tujuan
 
 1. **Input:** admin kirim teks loker apa saja + link ke nomor bot, lalu OpenAI mengekstrak datanya dan menyimpannya ke Google Sheet sebagai draft.
