@@ -1,3 +1,4 @@
+import Announcements from "@/components/jobready/Announcements";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -143,6 +144,7 @@ export default function JobReadyHubDashboard() {
 
   return (
     <div className="space-y-8">
+      <Announcements />
       {error ? (
         <Card>
           <CardContent className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">

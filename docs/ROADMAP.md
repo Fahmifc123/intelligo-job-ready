@@ -6,8 +6,8 @@ Semua fitur baru dilindungi feature flag dan bisa dinyalakan satu per satu dari 
 ## Tahap 1 - Fondasi
 - [x] **Job Board khusus alumni.** Kunci `/api/public/jobs` jadi endpoint yang wajib login alumni. Tidak ada data lowongan yang publik.
 - [x] **Lamaran Saya (application tracker).** Diisi manual oleh alumni: posisi, perusahaan, link lowongan dari mana saja, tanggal, catatan. Status: Disimpan, Melamar, Tes/Interview, Offer, Diterima, Ditolak. Bisa diisi otomatis dari Job Board.
-- [ ] **Pengumuman di dashboard** (dikelola admin).
-- [ ] **Import data Google Form** pendataan alumni ke akun alumni + kode akses (admin).
+- [x] **Pengumuman di dashboard** (dikelola admin).
+- [x] **Import data Google Form** pendataan alumni ke akun alumni + kode akses (admin).
 
 ## Tahap 2 - Belajar
 - [x] **Video Course.** Course, modul, video; progres tonton dan lanjutkan. Admin mengelola course. Hosting video belum diputuskan (YouTube unlisted atau Vimeo/Bunny Stream dengan pembatasan domain).
