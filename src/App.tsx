@@ -21,6 +21,9 @@ const InterviewPrep = lazy(() => import("./pages/jobready/JobReadyHubInterviewPr
 const InterviewRealtime = lazy(() => import("./pages/jobready/JobReadyHubInterviewRealtime"));
 const CodingTest = lazy(() => import("./pages/jobready/JobReadyHubCodingTest"));
 const Applications = lazy(() => import("./pages/jobready/JobReadyHubApplications"));
+const Courses = lazy(() => import("./pages/jobready/JobReadyHubCourses"));
+const CourseDetail = lazy(() => import("./pages/jobready/JobReadyHubCourseDetail"));
+const LiveSessions = lazy(() => import("./pages/jobready/JobReadyHubLiveSessions"));
 const Profile = lazy(() => import("./pages/jobready/JobReadyHubProfile"));
 
 const queryClient = new QueryClient();
@@ -62,6 +65,9 @@ const App = () => (
                 <Route path="/interview-realtime" element={hub(<InterviewRealtime />, "interview-realtime")} />
                 <Route path="/coding-test" element={hub(<CodingTest />, "coding-test")} />
                 <Route path="/applications" element={hub(<Applications />, "application-tracker")} />
+                <Route path="/courses" element={hub(<Courses />, "video-course")} />
+                <Route path="/courses/:id" element={hub(<CourseDetail />, "video-course")} />
+                <Route path="/live-sessions" element={hub(<LiveSessions />, "live-session")} />
                 <Route path="/profile" element={hub(<Profile />, "profile")} />
                 <Route path="/u/:username" element={<PublicAlumniProfile />} />
                 <Route path="/job-ready-hub/*" element={<LegacyRedirect />} />

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, ClipboardList, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, CalendarDays, ClipboardList, PlayCircle, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useLocation } from "react-router-dom";
@@ -14,6 +14,8 @@ export const hubNavItems = [
   { path: "/cv-analyzer", label: "CV Analyzer", icon: FileText, featureKey: "cv-analyzer" },
   { path: "/cv-builder", label: "CV Builder", icon: FileEdit, featureKey: "cv-builder" },
   { path: "/cover-letter", label: "Cover Letter", icon: Mail, featureKey: "cover-letter" },
+  { path: "/courses", label: "Video Course", icon: PlayCircle, featureKey: "video-course" },
+  { path: "/live-sessions", label: "Live Session", icon: CalendarDays, featureKey: "live-session" },
   { path: "/interview-prep", label: "Latihan Interview", icon: Mic, featureKey: "interview-prep" },
   { path: "/interview-realtime", label: "Interview Realtime", icon: Radio, featureKey: "interview-realtime" },
   { path: "/jobs", label: "Lowongan", icon: Briefcase, featureKey: "job-board" },
@@ -82,7 +84,7 @@ export default function JobReadyHubLayout({ children }: JobReadyHubLayoutProps) 
           <ul className="flex md:flex-wrap gap-1 pb-3 w-max md:w-auto">
             {navItems.map((item) => {
               const Icon = item.icon;
-              const isActive = location.pathname === item.path;
+              const isActive = item.path === "/" ? location.pathname === "/" : location.pathname.startsWith(item.path);
               return (
                 <li key={item.path}>
                   <Link

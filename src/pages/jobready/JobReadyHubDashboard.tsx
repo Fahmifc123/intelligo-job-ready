@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, Check, ClipboardList, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, CalendarDays, Check, ClipboardList, PlayCircle, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -102,6 +102,13 @@ export default function JobReadyHubDashboard() {
         { title: "CV Analyzer", description: "Cek kecocokan CV kamu dengan posisi yang dituju.", icon: FileText, to: "/cv-analyzer", cta: "Analisis CV", featureKey: "cv-analyzer" },
         { title: "CV Builder", description: "Buat CV yang rapi dan mudah dibaca sistem ATS.", icon: FileEdit, to: "/cv-builder", cta: "Buat CV", featureKey: "cv-builder" },
         { title: "Cover Letter", description: "Susun surat lamaran dari form yang terarah.", icon: Mail, to: "/cover-letter", cta: "Buat Cover Letter", featureKey: "cover-letter" },
+      ],
+    },
+    {
+      title: "Belajar",
+      items: [
+        { title: "Video Course", description: "Materi video persiapan kerja, tonton sesuai urutan.", icon: PlayCircle, to: "/courses", cta: "Tonton", featureKey: "video-course" },
+        { title: "Live Session", description: "Jadwal kelas live gratis untuk alumni Job Ready.", icon: CalendarDays, to: "/live-sessions", cta: "Lihat Jadwal", featureKey: "live-session" },
       ],
     },
     {
