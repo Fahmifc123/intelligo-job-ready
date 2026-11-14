@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, Check, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, Check, ClipboardList, Code2, FileEdit, FileText, Mail, Mic, Radio, UserCircle } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -116,6 +116,7 @@ export default function JobReadyHubDashboard() {
       title: "Cari Kerja",
       items: [
         { title: "Lowongan", description: "Lihat lowongan yang cocok dengan profil kamu.", icon: Briefcase, to: "/jobs", cta: "Lihat Lowongan", featureKey: "job-board" },
+        { title: "Lamaran Saya", description: "Catat lowongan yang kamu lamar dan pantau statusnya.", icon: ClipboardList, to: "/applications", cta: "Buka Lamaran", featureKey: "application-tracker" },
         { title: "Profil & Checklist", description: "Kelola profil karier, checklist kesiapan, dan profil publik.", icon: UserCircle, to: "/profile", cta: "Kelola Profil", featureKey: "profile" },
       ],
     },

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useAlumniAuth } from "@/contexts/AlumniAuthContext";
 import { useJobReadyHubFeatures } from "@/hooks/use-job-ready-hub-features";
 import { cn } from "@/lib/utils";
-import { Briefcase, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, ClipboardList, Code2, FileEdit, FileText, LayoutDashboard, LogOut, Mail, Mic, Radio, UserCircle } from "lucide-react";
 import { ReactNode } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, Navigate, useLocation } from "react-router-dom";
@@ -17,6 +17,7 @@ export const hubNavItems = [
   { path: "/interview-prep", label: "Latihan Interview", icon: Mic, featureKey: "interview-prep" },
   { path: "/interview-realtime", label: "Interview Realtime", icon: Radio, featureKey: "interview-realtime" },
   { path: "/jobs", label: "Lowongan", icon: Briefcase, featureKey: "job-board" },
+  { path: "/applications", label: "Lamaran Saya", icon: ClipboardList, featureKey: "application-tracker" },
   { path: "/coding-test", label: "Coding Test", icon: Code2, featureKey: "coding-test" },
 ];
 

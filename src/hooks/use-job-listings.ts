@@ -1,5 +1,4 @@
 import { Job } from "@/components/jobboard/types";
-import jobsData from "@/data/jobs.json";
 import { useEffect, useState } from "react";
 
 interface ApiJob {
@@ -17,8 +16,6 @@ interface ApiJob {
   deadline: string | null;
   created_at: string;
 }
-
-const STATIC_JOBS = jobsData as Job[];
 
 function postedLabel(createdAt: string): string {
   const created = new Date(createdAt.replace(" ", "T") + (createdAt.endsWith("Z") ? "" : "Z"));
@@ -47,31 +44,23 @@ function toJob(job: ApiJob): Job {
   };
 }
 
-// Satu request per kunjungan, dipakai bersama oleh daftar lowongan dan statistik halaman.
-let cache: Promise<Job[]> | null = null;
-
-function loadManualJobs(): Promise<Job[]> {
-  cache ??= fetch("/api/public/jobs")
-    .then((res) => (res.ok ? res.json() : { jobs: [] }))
-    .then((data: { jobs?: ApiJob[] }) => (Array.isArray(data.jobs) ? data.jobs.map(toJob) : []))
-    .catch(() => {
-      cache = null; // coba lagi di kunjungan berikutnya
-      return [];
-    });
-  return cache;
-}
-
-/** Lowongan dari admin (terbaru di atas) lalu data lowongan statis. */
+/** Lowongan Job Ready, khusus alumni yang login (endpoint /api/alumni/jobs).
+ * Tanpa token alumni, hasilnya kosong: data lowongan tidak dibuka untuk publik. */
 export function useJobListings(): Job[] {
-  const [manualJobs, setManualJobs] = useState<Job[]>([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("alumni_token");
+    if (!token) return;
     let active = true;
-    loadManualJobs().then((jobs) => active && setManualJobs(jobs));
+    fetch("/api/alumni/jobs", { headers: { Authorization: `Bearer ${token}` } })
+      .then((res) => (res.ok ? res.json() : { jobs: [] }))
+      .then((data: { jobs?: ApiJob[] }) => active && setJobs(Array.isArray(data.jobs) ? data.jobs.map(toJob) : []))
+      .catch(() => active && setJobs([]));
     return () => {
       active = false;
     };
   }, []);
 
-  return manualJobs.length ? [...manualJobs, ...STATIC_JOBS] : STATIC_JOBS;
+  return jobs;
 }

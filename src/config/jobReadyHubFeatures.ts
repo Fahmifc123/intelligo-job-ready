@@ -1,4 +1,4 @@
-import { Briefcase, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
+import { Briefcase, ClipboardList, Code2, FileEdit, FileText, LucideIcon, Mail, Mic, Radio, UserCircle } from "lucide-react";
 
 export interface JobReadyHubFeatureDef {
   key: string;
@@ -46,6 +46,12 @@ export const JOB_READY_HUB_FEATURES: JobReadyHubFeatureDef[] = [
     label: "Job Board",
     icon: Briefcase,
     comingSoonDescription: "Fitur pencarian & rekomendasi lowongan kerja segera hadir untuk kamu.",
+  },
+  {
+    key: "application-tracker",
+    label: "Lamaran Saya",
+    icon: ClipboardList,
+    comingSoonDescription: "Pencatat lamaran kerja segera hadir untuk kamu.",
   },
   {
     key: "coding-test",
