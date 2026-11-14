@@ -1,0 +1,8 @@
+{
+  "_catatan": "Isi daftar perusahaan target. 'ats' salah satu: greenhouse, lever, smartrecruiters, ashby. 'slug' adalah nama board perusahaan di URL halaman kariernya (mis. boards.greenhouse.io/<slug>, jobs.lever.co/<slug>). Cek dulu halaman karier perusahaan untuk memastikan ATS dan slug-nya.",
+  "locations": ["Indonesia", "Jakarta", "Bandung", "Surabaya", "Remote"],
+  "companies": [
+    { "name": "Contoh Perusahaan A", "ats": "greenhouse", "slug": "ganti-dengan-slug" },
+    { "name": "Contoh Perusahaan B", "ats": "lever", "slug": "ganti-dengan-slug" }
+  ]
+}
